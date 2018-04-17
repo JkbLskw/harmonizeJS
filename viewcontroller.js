@@ -23,7 +23,13 @@ function clear_tracks(){
 }
 
 function append_playlist(playlist){
-	var playlist_holder = $('<li>').text(playlist.title).attr({'id':playlist.id, 'class':'playlist'}).append($('<ul>').attr({'id':'tracklist_' + playlist.id, 'class':'tracklist'}));
+	var playlist_holder = $('<div>').attr({'class':'playlist_holder'});
+	var playlist_image = $('<img>').attr({'src':playlist.picture, 'alt':playlist.title});
+	var playlist_title = $('<h2>').text(playlist.title).attr({'id':playlist.id, 'class':'playlist'});
+	var playlist_image_title_holder = $('<div>').attr({'display':'inline'});
+	var tracklist_element = $('<ul>').attr({'id':'tracklist_' + playlist.id, 'class':'tracklist'})
+	playlist_image_title_holder.append(playlist_image).append(playlist_title)
+	playlist_holder.append(playlist_image_title_holder).append(tracklist_element);
 	$('#playlist_list').append(playlist_holder);
 }
 

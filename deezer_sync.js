@@ -2,7 +2,7 @@
 window.dzAsyncInit = function() {
 	DZ.init({
 		appId  : '277182',
-		channelUrl : 'http://localhost/harmonizer/'
+		channelUrl : 'http://localhost/harmonizeJS/'
 	});
 	console.log('DZ initialized');
 };
@@ -33,6 +33,7 @@ function get_playlists() {
 			get_tracks_by_playlist(current_playlist)
 		}
 		// show playlists as button-list in html
+		console.log(playlists);
 		show_playlists(playlists);
 	});
 }
