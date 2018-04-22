@@ -1,11 +1,13 @@
 ### harmonizeJS ###
 
 Sync-Format:
-  {
-    playlistname:
-    [
-      [trackname, artist],
-      ...
-    ],
+'''
+{
+  playlistname:
+  [
+    [trackname, artist],
     ...
-  }
+  ],
+  ...
+}
+'''
