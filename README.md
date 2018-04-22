@@ -1,7 +1,7 @@
-### harmonizeJS ###
+# harmonizeJS
 
-Sync-Format:
-'''
+### Sync-Format:
+```
 {
   playlistname:
   [
@@ -10,4 +10,4 @@ Sync-Format:
   ],
   ...
 }
-'''
+```
