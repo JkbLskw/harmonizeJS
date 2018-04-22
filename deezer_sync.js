@@ -1,3 +1,6 @@
+// playlists with tracks
+var playlist_hashtable = {}
+
 //initialize deezer javascript sdk
 window.dzAsyncInit = function() {
 	DZ.init({
@@ -6,9 +9,6 @@ window.dzAsyncInit = function() {
 	});
 	console.log('DZ initialized');
 };
-
-// playlists with tracks
-var playlist_hashtable = {}
 
 // login to deezer-api
 function login_deezer() {
@@ -45,10 +45,14 @@ function get_tracks_by_playlist(current_playlist){
 		var tracks = response.data;
 		var tracklist = [];
 		for (var i = 0; i < tracks.length; i++){
-			tracklist.push(tracks[i].title)
-		}	
+			var track = [tracks[i].title, tracks[i].artist.name];
+			tracklist.push(track)
+		}
 		playlist_hashtable[current_playlist.title] = tracklist;
 		// show tracks as list in html
 		show_tracks(tracks, local_playlist_id);
+		console.log(tracks);
 	});
+
+	console.log(playlist_hashtable);
 }
