@@ -7,10 +7,10 @@ function show_playlists(playlists){
 	playlists.forEach(append_playlist);
 }
 
-function show_tracks(track_list, playlist_id){
+function show_tracks(tracklist, playlist_id){
 	clear_tracks();
-	for (var i = 0; i < track_list.length; i++){
-		append_track(track_list[i], playlist_id);
+	for (var i = 0; i < tracklist.length; i++){
+		append_track(tracklist[i], playlist_id);
 	}
 }
 
@@ -34,6 +34,6 @@ function append_playlist(playlist){
 }
 
 function append_track(track, playlist_id){
-	var track_holder = $('<li>').attr('id', track.id).text(track.title);
+	var track_holder = $('<li>').text(track.join(' - '));
 	$('#tracklist_' + playlist_id).append(track_holder);
 }

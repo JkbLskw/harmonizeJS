@@ -1,12 +1,15 @@
+// playlists with tracks
+var playlists_dic = {}
+
+// deezer service object
+var deezer = service.factory('deezer');
+deezer.init();
+
 $(document).ready(function(){
     $("#login_btn").click(function(){
-		login_deezer();
+		deezer.login();
     });
-	$("#playlists_btn").click(function(){
-		get_playlists();
-    });
-	$("#data").on('click', 'button.playlist', function(){
-		var id = $(this).attr('id');
-		get_tracks_by_playlist(id);
+	$("#export_btn").click(function(){
+		deezer.export('test');
     });
 });

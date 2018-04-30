@@ -4,19 +4,17 @@
 		<title>harmonizer</title>
 		<link rel="stylesheet" href="styles.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="events.js"></script>
-		<script src="viewcontroller.js"></script>
-		<script src="deezer_sync.js"></script>
 	</head>
 	<body>
-		<div id="dz-root">
-			<script src="https://e-cdns-files.dzcdn.net/js/min/dz.js" async></script>
-		</div>
+		<div id="dz-root"></div>
 		<button type="button" id="login_btn">Login Deezer</button>
-		<button class="hidden_btn" type="button" id="playlists_btn" style="display:none;">Playlists</button> 
+		<button class="hidden_btn" type="button" id="export_btn" style="display:none;">Export</button>
 		<div id="data">
 			<ul id="playlist_list"></ul>
 		</div>
-		
+		<script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
+		<script src="service.js"></script>
+		<script src="events.js"></script>
+		<script src="viewcontroller.js"></script>
 	</body>
 </html>
