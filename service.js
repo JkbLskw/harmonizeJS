@@ -33,7 +33,7 @@ service.deezer = function(){
           // iterate all playlists and init them
           for (var playlist_key in raw_playlists){
             var playlist = raw_playlists[playlist_key];
-            playlists.push({'name':playlist.title, 'id':playlist.id, 'track_count':playlist.nb_tracks});
+            playlists.push({'title':playlist.title, 'identifier':playlist.id});
           }
           resolve(playlists);
         });
@@ -42,7 +42,7 @@ service.deezer = function(){
     var get_tracks = function(playlist){
       return new Promise(function(resolve, reject){
         // get all tracks from playlist and writes them into the given dictionary
-        DZ.api('/playlist/' + playlist.id + '/tracks', function(response) {
+        DZ.api('/playlist/' + playlist.identifier + '/tracks', function(response) {
           var tracks = response.data;
           var simplified_tracks = [];
           // simplify tracks and list them
@@ -53,24 +53,32 @@ service.deezer = function(){
           }
 
           // writing simplified tracklist to dictionary
-          playlist['track_data'] = simplified_tracks;
+          playlist['track'] = simplified_tracks;
           resolve(playlist);
         });
       });
     }
-    var download = function(data){
-      var element = document.createElement('a');
-      data = JSON.stringify(data);
-      element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(data));
-      element.setAttribute('download', 'export.json');
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
+    var pack = function(data){
+      var zip = new JSZip();
+      for(var key in data){
+        var element = data[key];
+        var json_element = JSON.stringify(element);
+        var blob = new Blob([json_element], {type: "application/json"})
+        zip.file(element.title+'.jspf', blob);
+      }
+      var promise = null;
+      if (JSZip.support.blob) {
+        promise = zip.generateAsync({type : "blob"});
+      } else {
+        promise = zip.generateAsync({type : "string"});
+      }
+      promise.then(function(zipped_blob){
+        saveAs(zipped_blob, "playlists.zip");
+        console.log("zipping successful");
+      }).catch((reason) => {
+        console.log('Handle rejected zipping ('+reason+') here.');
+      });
     }
-
-    var data = {};
-    console.log('export start');
 
     let playlist_promise = get_playlists();
     playlist_promise.then(function(value){
@@ -81,9 +89,7 @@ service.deezer = function(){
           track_promises.push(get_tracks(playlist));
         }
         Promise.all(track_promises).then(function(playlists){
-          data['playlist_count'] = playlists.length;
-          data['playlist_data'] = playlists;
-          download(data);
+          pack(playlists);
         }, function(err){
           console.log('Error in track_promises ('+err+')');
         });
