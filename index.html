@@ -7,11 +7,18 @@
 		<script src="jszip.js"></script>
 		<script src="FileSaver.min.js"></script>
 		<script src="Blob.js"></script>
+		<script src="spotify-web-api.js"></script>
 	</head>
 	<body>
 		<div id="dz-root"></div>
-		<button type="button" id="login_btn">Login Deezer</button>
-		<button class="hidden_btn" type="button" id="export_btn" style="display:none;">Export</button>
+		<div>
+			<button type="button" id="login_deezer_btn">Login Deezer</button>
+			<button class="hidden_btn" type="button" id="export_deezer_btn">Export</button> <!-- style="display:none;" -->
+		</div>
+		<div>
+			<button type="button" id="login_spotify_btn">Login Spotify</button>
+			<button class="hidden_btn" type="button" id="export_spotify_btn">Export</button> <!-- style="display:none;" -->
+		</div>
 		<div id="data">
 			<ul id="playlist_list"></ul>
 		</div>

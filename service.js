@@ -1,6 +1,6 @@
 var service = {}
 service.deezer = function(){
-  this.init = function () {
+  this.init = function (){
     // initialize deezer javascript sdk
     DZ.init({
   		appId  : '277182',
@@ -22,7 +22,7 @@ service.deezer = function(){
   this.sync = function (other){
     console.log('not implemented yet')
   }
-  this.export = function (type){
+  this.export = function (){
     var get_playlists = function(){
       var playlists = [];
       return new Promise(function(resolve, reject){
@@ -102,8 +102,27 @@ service.deezer = function(){
 }
 
 service.spotify = function(){
-  // TODO: spotify
-	console.log('not implemented yet');
+  var spotifyApi = null;
+  this.init = function (){
+    spotifyApi = new SpotifyWebApi();
+    console.log('spotify initialized');
+  }
+  this.login = function (){
+    // TODO get token
+    var user_token = "BQAkDyryfjQytbk5AWl-f65CLx4uD6iRAUp0CAU9vdtJB7ETu0P4dDkmi6I8MmYrrwfkuqZpHv0CPczrb2pKTpFUYez-Mn-suD9V9IZuLTIeracIICl45-ENnPAdtcKp-7ivQoVJJ0PCoUzjMPDMtGWVPZ6G_FI";
+    spotifyApi.setAccessToken(user_token);
+  }
+  this.export = function (){
+    var get_playlists = function(){
+      spotifyApi.getUserPlaylists().then(function(data) {
+        console.log('playlists', data);
+      }, function(err) {
+        console.error(err);
+      });
+    }
+    // testing playlists
+    get_playlists();
+  }
 }
 
 service.factory = function(type){
