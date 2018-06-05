@@ -1,7 +1,7 @@
 # harmonizeJS
 ### services
 - Deezer with [JavascriptSDK](https://developers.deezer.com/sdk/javascript)
-- Spotify with [Web-API](https://beta.developer.spotify.com/documentation/web-api/) (not implemented yet)
+- Spotify with [Spotify-Web-API-JS](https://github.com/jmperez/spotify-web-api-js) and [Spotify-Web-API](https://beta.developer.spotify.com/documentation/web-api/) (in process)
 ### sync
 ##### procedure
 
