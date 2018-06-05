@@ -11,7 +11,7 @@
 
 ### export
 - export all playlists from a service and zip them
-- [JSPF](http://www.xspf.org/jspf/) as playlist-format.
+- [JSPF](http://www.xspf.org/jspf/) as playlist-format. (see also [XSPF](http://www.xspf.org/))
 
 ##### procedure
       1. create and initialize service
